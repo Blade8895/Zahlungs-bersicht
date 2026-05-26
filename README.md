@@ -57,7 +57,7 @@ In Produktion werden standardmäßig keine Demo-Daten angelegt. Das passiert aut
 Empfohlene Produktions-Umgebung:
 
 ```text
-HOST=127.0.0.1
+HOST=0.0.0.0
 PORT=4173
 NODE_ENV=production
 SEED_MODE=none
@@ -188,7 +188,21 @@ Danach im SSL-Tab:
 - `HTTP/2 Support`
 - `HSTS Enabled` optional
 
-Die App selbst sollte lokal nur auf `127.0.0.1` lauschen, damit sie ausschließlich über den Proxy erreichbar ist.
+Wenn Nginx Proxy Manager nicht auf demselben Host läuft, sondern in deinem LAN oder Docker-Netzwerk, muss die App auf einer erreichbaren Adresse lauschen. Dafür `HOST=0.0.0.0` setzen. Dann ist sie auf der Server-IP im Netzwerk erreichbar, zum Beispiel `192.168.x.x:4173`.
+
+Für diesen Fall im Proxy Host:
+
+- Forward Hostname / IP: die interne Server-IP der Node-App, zum Beispiel `192.168.1.50`
+- Forward Port: `4173`
+
+Wichtig für die Freigabe:
+
+- Die App muss mit `HOST=0.0.0.0` oder alternativ direkt mit der LAN-IP gestartet werden.
+- Die Firewall des Servers muss Verbindungen auf `4173` vom Proxy Manager erlauben.
+- Wenn du `systemd` nutzt, danach `sudo systemctl restart zahlungserfassung` ausführen.
+- Prüfen kannst du das auf dem Server mit `ss -ltnp | grep 4173` oder `sudo netstat -tulpn | grep 4173`. Dort sollte nicht nur `127.0.0.1:4173`, sondern `0.0.0.0:4173` oder die LAN-IP stehen.
+
+Die Anwendung liest die `.env` jetzt selbst beim Start ein. Änderungen an `HOST`, `PORT` oder anderen Werten greifen nach einem Neustart des Node-Prozesses.
 
 ## Aktualisieren einer Live-Installation
 

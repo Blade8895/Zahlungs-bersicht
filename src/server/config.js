@@ -1,7 +1,9 @@
 import { mkdirSync } from 'node:fs';
 import path from 'node:path';
+import { loadEnvFile } from './env.js';
 
 const rootDir = process.cwd();
+loadEnvFile(rootDir);
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
