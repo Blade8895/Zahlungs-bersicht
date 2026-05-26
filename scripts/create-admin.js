@@ -4,6 +4,19 @@ import process from 'node:process';
 import { openDatabase, nowIso } from '../src/server/db.js';
 import { hashPassword, id } from '../src/server/auth.js';
 
+class SilentOutput extends Writable {
+  constructor(target) {
+    super();
+    this.target = target;
+    this.muted = false;
+  }
+
+  _write(chunk, encoding, callback) {
+    if (!this.muted) this.target.write(chunk, encoding);
+    callback();
+  }
+}
+
 const args = parseArgs(process.argv.slice(2));
 const db = openDatabase();
 
@@ -82,17 +95,4 @@ function sanitizeName(value) {
 function fail(message, code = 1) {
   process.stderr.write(`${message}\n`);
   process.exit(code);
-}
-
-class SilentOutput extends Writable {
-  constructor(target) {
-    super();
-    this.target = target;
-    this.muted = false;
-  }
-
-  _write(chunk, encoding, callback) {
-    if (!this.muted) this.target.write(chunk, encoding);
-    callback();
-  }
 }
