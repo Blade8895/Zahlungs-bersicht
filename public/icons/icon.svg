@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Zahlungserfassung">
+  <rect width="512" height="512" rx="112" fill="#07111f"/>
+  <path d="M128 152c0-26.5 21.5-48 48-48h160c26.5 0 48 21.5 48 48v208c0 26.5-21.5 48-48 48H176c-26.5 0-48-21.5-48-48V152z" fill="#0f1e33"/>
+  <path d="M168 168h176M168 224h104M168 280h176M168 336h136" stroke="#d8fff8" stroke-width="28" stroke-linecap="round"/>
+  <path d="M320 216l42 42 74-86" fill="none" stroke="#2dd4bf" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="128" cy="384" r="58" fill="#f59e0b"/>
+  <path d="M103 384h50M128 359v50" stroke="#07111f" stroke-width="22" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "name": "zahlungserfassung",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Mandantenfähige Zahlungsverwaltungs-App als installierbare PWA.",
+  "scripts": {
+    "dev": "node --watch src/server/index.js",
+    "start": "node src/server/index.js",
+    "create-admin": "node scripts/create-admin.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
